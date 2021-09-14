@@ -54,82 +54,82 @@ namespace BlogHub.Data.Migrations
                         new
                         {
                             Id = 15,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 0",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 233, DateTimeKind.Local).AddTicks(1358),
-                            Title = "New Article Title0"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 413, DateTimeKind.Local).AddTicks(8927),
+                            Title = "New Article Title No : 0"
                         },
                         new
                         {
                             Id = 16,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 1",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7640),
-                            Title = "New Article Title1"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7187),
+                            Title = "New Article Title No : 1"
                         },
                         new
                         {
                             Id = 17,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 2",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7752),
-                            Title = "New Article Title2"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7275),
+                            Title = "New Article Title No : 2"
                         },
                         new
                         {
                             Id = 18,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 3",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7770),
-                            Title = "New Article Title3"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7294),
+                            Title = "New Article Title No : 3"
                         },
                         new
                         {
                             Id = 19,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 4",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7783),
-                            Title = "New Article Title4"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7308),
+                            Title = "New Article Title No : 4"
                         },
                         new
                         {
                             Id = 20,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 5",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7800),
-                            Title = "New Article Title5"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7327),
+                            Title = "New Article Title No : 5"
                         },
                         new
                         {
                             Id = 21,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 6",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7813),
-                            Title = "New Article Title6"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7341),
+                            Title = "New Article Title No : 6"
                         },
                         new
                         {
                             Id = 22,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 7",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7826),
-                            Title = "New Article Title7"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7355),
+                            Title = "New Article Title No : 7"
                         },
                         new
                         {
                             Id = 23,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 8",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7838),
-                            Title = "New Article Title8"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7370),
+                            Title = "New Article Title No : 8"
                         },
                         new
                         {
                             Id = 24,
-                            AuthorId = "1d936220-0fb7-49bf-aa42-b5634f9481fe",
+                            AuthorId = "86acb786-ca08-49f0-9403-a6113bfa7763",
                             Content = "This is New Article Content You'll learn a lot of things from this article. Article No : 9",
-                            CreatedTime = new DateTime(2021, 9, 13, 17, 43, 39, 234, DateTimeKind.Local).AddTicks(7897),
-                            Title = "New Article Title9"
+                            CreatedTime = new DateTime(2021, 9, 14, 15, 44, 36, 414, DateTimeKind.Local).AddTicks(7385),
+                            Title = "New Article Title No : 9"
                         });
                 });
 
@@ -201,6 +201,25 @@ namespace BlogHub.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "86acb786-ca08-49f0-9403-a6113bfa7763",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ef9d52da-809f-4ed0-8ce6-330e67885416",
+                            Email = "kadir.kalkan@bilgeadam.com",
+                            EmailConfirmed = false,
+                            FullName = "Kadir KALKAN",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "KADİR.KALKAN@BİLGEADAM.COM",
+                            NormalizedUserName = "KADİR.KALKAN@BİLGEADAM.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF7dpkdw8GDUhXY5mLxYmMotfMxfxNk6qYnQrIJotEV1N2kvyUp8QpMvAtZA5kCoIQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "bcd2beb1-18b5-4144-b3d8-037f296c2d6d",
+                            TwoFactorEnabled = false,
+                            UserName = "kadir.kalkan@bilgeadam.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
