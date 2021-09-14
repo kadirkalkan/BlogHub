@@ -43,6 +43,12 @@ namespace BlogHub.Controllers
             return View(articleList);
         }
 
+        [HttpGet]
+        public IActionResult AddArticle()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -11,8 +11,7 @@ namespace BlogHub.Data
     // Default ApplicationDBContext
     public class DatabaseContext : IdentityDbContext<HubUser>
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options)
-            : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
             this.Database.Migrate();
         }
@@ -22,7 +21,6 @@ namespace BlogHub.Data
             base.OnModelCreating(builder);
 
             builder.Entity<Article>().Property(e => e.CreatedTime).HasDefaultValueSql("getutcdate()");
-
 
             /*
              * 

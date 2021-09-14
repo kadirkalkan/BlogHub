@@ -21,5 +21,12 @@ namespace BlogHub.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult AddArticle()
+        {
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
