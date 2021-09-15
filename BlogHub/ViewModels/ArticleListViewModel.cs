@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@ namespace BlogHub.ViewModels
         public string Content { get; set; }
         public string Author { get; set; }
         public DateTime CreatedTime { get; set; }
+        public string ArticlePicture { get; set; }
 
         public string GetCreatedTime()
         {
@@ -20,9 +23,11 @@ namespace BlogHub.ViewModels
 
         public string GetContentSummary()
         {
+            int limit = 500;
             string summary = string.Empty;
-            if (Content.Length >= 50)
-                summary = string.Format("{0}...", Content.Substring(0, 50));
+
+            if (Content.Length >= limit)
+                summary = string.Format("{0}...", Content.Substring(0, limit));
             else
                 summary = Content;
 

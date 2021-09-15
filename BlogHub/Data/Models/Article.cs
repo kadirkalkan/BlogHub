@@ -21,6 +21,8 @@ namespace BlogHub.Data.Models
         [MinLength(100)]
         public string Content { get; set; }
 
+        public string ArticlePicture { get; set; }
+
         [Required]
         public DateTime CreatedTime { get; set; } = DateTime.Now;
 

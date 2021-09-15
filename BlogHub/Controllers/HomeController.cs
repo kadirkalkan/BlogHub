@@ -37,7 +37,15 @@ namespace BlogHub.Controllers
             List<ArticleListViewModel> articleList = _context.Articles
                 .OrderByDescending(x=>x.CreatedTime)
                 .Take(20)
-                .Select(x=> new ArticleListViewModel() { Id = x.Id, Title = x.Title, Content = x.Content, Author = x.Author.FullName, CreatedTime = x.CreatedTime })
+                .Select(x=> new ArticleListViewModel() 
+                { 
+                    Id = x.Id, 
+                    Title = x.Title, 
+                    Content = x.Content, 
+                    Author = x.Author.FullName, 
+                    ArticlePicture = (string.IsNullOrEmpty(x.ArticlePicture) ? "null.png": x.ArticlePicture), 
+                    CreatedTime = x.CreatedTime 
+                })
                 .ToList();
 
             return View(articleList);
