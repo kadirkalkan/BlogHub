@@ -3,6 +3,7 @@ using BlogHub.Data.Models;
 using BlogHub.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -31,20 +32,25 @@ namespace BlogHub.Controllers
         {
             _context = context;
         }
-      
+
         public IActionResult Index()
         {
             List<ArticleListViewModel> articleList = _context.Articles
-                .OrderByDescending(x=>x.CreatedTime)
+                .OrderByDescending(x => x.CreatedTime)
                 .Take(20)
-                .Select(x=> new ArticleListViewModel() 
-                { 
-                    Id = x.Id, 
-                    Title = x.Title, 
-                    Content = x.Content, 
-                    Author = x.Author.FullName, 
-                    ArticlePicture = (string.IsNullOrEmpty(x.ArticlePicture) ? "null.png": x.ArticlePicture), 
-                    CreatedTime = x.CreatedTime 
+                .Include(x=> x.Author)
+                .AsEnumerable()// DBSet Lokalde değişik bir mimariye sahip olduğundan Çok Satırlı Lambda Kullanımına İzin Vermiyor. Bu Yüzden Yapıyı Enumerable'a çevirmek Gerekiyor.
+                .Select(x => 
+                {
+                    return new ArticleListViewModel()
+                    {
+                        Id = x.Id,
+                        Title = x.Title,
+                        Content = x.Content,
+                        Author = x.Author.FullName,
+                        ArticlePicture = (string.IsNullOrEmpty(x.ArticlePicture) ? "null.png" : x.ArticlePicture),
+                        CreatedTime = x.CreatedTime
+                    };
                 })
                 .ToList();
 
@@ -55,6 +61,14 @@ namespace BlogHub.Controllers
         public IActionResult AddArticle()
         {
             return View();
+        }
+        
+
+        [HttpGet]
+        public IActionResult EditArticle(int id)
+        {
+            EditArticleViewModel model = _context.Articles.Select(x => new EditArticleViewModel() { Id = x.Id }).FirstOrDefault(x => x.Id.Equals(id));
+            return View(model);
         }
 
 

@@ -50,6 +50,18 @@ namespace BlogHub.Controllers
             return View("~/Views/Home/AddArticle.cshtml");
         }
 
+        [HttpPost]
+        public IActionResult EditArticle(EditArticleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // todo : Edit Kodu Yazılacak
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View("~/Views/Home/AddArticle.cshtml");
+        }
+
 
         private string UploadedFile(AddArticleViewModel model)
         {

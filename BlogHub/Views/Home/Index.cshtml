@@ -18,18 +18,16 @@
     }
 
     .black {
-        color:black !important;
+        color: black !important;
     }
 
-    .action:hover{
-        color:blue !important;
+    .action:hover {
+        color: blue !important;
     }
-
 </style>
 
 
 <div class="container">
-
     <h2 class="text-center">Last Articles</h2>
     <br />
     @foreach (var article in Model)
@@ -39,7 +37,9 @@
                 <div class="row">
                     <div class="col col-4">
                         <div class="row"><b>Author : </b> &nbsp; @article.Author</div>
-                        <div class="row"><img src="~/images/@article.ArticlePicture" alt="Alternate Text" style="object-fit: contain; width: 80%; height:80%;"  /></div>
+                        <div class="row">
+                            <img src="~/images/@article.ArticlePicture" alt="Alternate Text" style="object-fit: contain; width: 80%; height:80%;" />
+                        </div>
                     </div>
                     <div class="col col-8">
                         <a href="#" class="black action">

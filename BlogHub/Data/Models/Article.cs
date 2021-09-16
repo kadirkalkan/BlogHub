@@ -31,5 +31,6 @@ namespace BlogHub.Data.Models
 
         [Required]
         public HubUser Author { get; set; }
+
     }
 }
