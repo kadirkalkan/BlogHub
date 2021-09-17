@@ -4,6 +4,7 @@ using BlogHub.Extensions;
 using BlogHub.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -34,7 +35,7 @@ namespace BlogHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = UploadedFile(model);
+                string uniqueFileName = UploadedFile(model.ArticlePicture);
 
                 Article article = new Article
                 {
@@ -55,26 +56,34 @@ namespace BlogHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                // todo : Edit Kodu Yazılacak
+                var article = _context.Articles.FirstOrDefault(x => x.Id.Equals(model.Id));
+                if (article is null)
+                    return NotFound();
+
+                article.Title = model.Title;
+                article.Content = model.Content;
+
+                if (model.ArticlePicture is not null)
+                    article.ArticlePicture = UploadedFile(model.ArticlePicture);
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
-            return View("~/Views/Home/AddArticle.cshtml");
+            return View("~/Views/Home/EditArticle.cshtml", model);
         }
 
 
-        private string UploadedFile(AddArticleViewModel model)
+        private string UploadedFile(IFormFile pictureFile)
         {
             string uniqueFileName = null;
 
-            if (model.ArticlePicture != null)
+            if (pictureFile != null)
             {
                 string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ArticlePicture.FileName;
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + pictureFile.FileName;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    model.ArticlePicture.CopyTo(fileStream);
+                    pictureFile.CopyTo(fileStream);
                 }
             }
             return uniqueFileName;

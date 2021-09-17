@@ -67,9 +67,22 @@ namespace BlogHub.Controllers
         [HttpGet]
         public IActionResult EditArticle(int id)
         {
-            EditArticleViewModel model = _context.Articles.Select(x => new EditArticleViewModel() { Id = x.Id }).FirstOrDefault(x => x.Id.Equals(id));
+            EditArticleViewModel model = _context.Articles.Select(x => new EditArticleViewModel() { Id = x.Id, Title = x.Title, Content = x.Content, ArticlePictureName = GetImageName(x.ArticlePicture)}).FirstOrDefault(x => x.Id.Equals(id));
             return View(model);
         }
+
+        private static string GetImageName(string imageName)
+        {
+            string name = "Choose File";
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                //93b56cb5-1bbc-4211-a640-40135d82e885_dosyaismi.jpg
+                // _'den itibaren uniqueFileName içerisindeki dosya adını ve uzantısını alır.
+                name = imageName.Substring(37);
+            }
+            return name;
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

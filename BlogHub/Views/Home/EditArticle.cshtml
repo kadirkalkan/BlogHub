@@ -1,12 +1,13 @@
-﻿@model AddArticleViewModel
+﻿@model EditArticleViewModel
 @{
-    ViewData["Title"] = "AddArticle";
+    ViewData["Title"] = "EditArticle";
 }
 
-<h1>Add Article</h1>
+<h1>Edit Article</h1>
 
-<form asp-controller="Data" asp-action="AddArticle" enctype="multipart/form-data">
-
+<form asp-controller="Data" asp-action="EditArticle" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ArticlePictureName" />
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -30,7 +31,7 @@
                 <label asp-for="ArticlePicture" class="control-label"></label>
                 <div class="custom-file">
                     <input asp-for="ArticlePicture" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label id="custom-file-label" class="custom-file-label" for="customFile"></label>
                 </div>
                 <span asp-validation-for="ArticlePicture" class="text-danger"></span>
             </div>
@@ -45,12 +46,19 @@
 
 @section scripts{
     <script type="text/javascript">
+        console.log('@Model.ArticlePictureName')
+        $("#custom-file-label").html('@Model.ArticlePictureName');
 
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+
+
+        
+
+
     </script>
 }
 
