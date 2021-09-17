@@ -1,5 +1,6 @@
 ﻿using BlogHub.Data;
 using BlogHub.Data.Models;
+using BlogHub.Extensions;
 using BlogHub.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -67,7 +68,23 @@ namespace BlogHub.Controllers
         [HttpGet]
         public IActionResult EditArticle(int id)
         {
-            EditArticleViewModel model = _context.Articles.Select(x => new EditArticleViewModel() { Id = x.Id, Title = x.Title, Content = x.Content, ArticlePictureName = GetImageName(x.ArticlePicture)}).FirstOrDefault(x => x.Id.Equals(id));
+            var article = _context.Articles.FirstOrDefault(x => x.Id.Equals(id));
+
+            // Bu id'ye ait Article Var Fakat Login Olan Kullanıcıya Ait Değil.
+            if (article is not null && !User.IsThisUserLoggedOne(article.AuthorId))
+                article = null;
+
+            if (article is null)
+                return NotFound();
+
+            EditArticleViewModel model =  new EditArticleViewModel() 
+            { 
+                Id = article.Id, 
+                Title = article.Title, 
+                Content = article.Content, 
+                ArticlePictureName = GetImageName(article.ArticlePicture)
+            };
+
             return View(model);
         }
 

@@ -61,6 +61,11 @@ namespace BlogHub.Controllers
             if (ModelState.IsValid)
             {
                 var article = _context.Articles.FirstOrDefault(x => x.Id.Equals(model.Id));
+                
+                // Bu id'ye ait Article Var Fakat Login Olan Kullanıcıya Ait Değil.
+                if (article is not null && !User.IsThisUserLoggedOne(article.AuthorId))
+                    article = null;
+
                 if (article is null)
                     return NotFound();
 
@@ -74,6 +79,23 @@ namespace BlogHub.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View("~/Views/Home/EditArticle.cshtml", model);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteArticle(int id)
+        {
+            var article = _context.Articles.FirstOrDefault(x => x.Id.Equals(id));
+
+            // Bu id'ye ait Article Var Fakat Login Olan Kullanıcıya Ait Değil.
+            if (article is not null && !User.IsThisUserLoggedOne(article.AuthorId))
+                article = null;
+
+            if (article is null)
+                return NotFound();
+           
+            _context.Articles.Remove(article);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
