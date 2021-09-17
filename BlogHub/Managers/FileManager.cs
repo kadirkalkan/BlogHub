@@ -57,5 +57,18 @@ namespace BlogHub.Managers
                 System.IO.File.Delete(uri.LocalPath);
             }
         }
+
+
+        public string GetImageName(string imageName)
+        {
+            string name = "Choose File";
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                //93b56cb5-1bbc-4211-a640-40135d82e885_dosyaismi.jpg
+                // _'den itibaren uniqueFileName içerisindeki dosya adını ve uzantısını alır.
+                name = imageName.Substring(37);
+            }
+            return name;
+        }
     }
 }

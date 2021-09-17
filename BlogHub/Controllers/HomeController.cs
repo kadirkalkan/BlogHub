@@ -1,8 +1,10 @@
 ﻿using BlogHub.Data;
 using BlogHub.Data.Models;
 using BlogHub.Extensions;
+using BlogHub.Managers;
 using BlogHub.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -28,10 +30,11 @@ namespace BlogHub.Controllers
     public class HomeController : Controller
     {
         readonly DatabaseContext _context;
-
-        public HomeController(DatabaseContext context)
+        private readonly FileManager _fileManager;
+        public HomeController(DatabaseContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _fileManager = new FileManager(context, webHostEnvironment);
         }
 
         public IActionResult Index()
@@ -82,24 +85,41 @@ namespace BlogHub.Controllers
                 Id = article.Id, 
                 Title = article.Title, 
                 Content = article.Content, 
-                ArticlePictureName = GetImageName(article.ArticlePicture)
+                ArticlePictureName = _fileManager.GetImageName(article.ArticlePicture)
             };
 
             return View(model);
         }
 
-        private static string GetImageName(string imageName)
+        [HttpGet("[action]/{username}")]
+        public IActionResult Profile(string username)
         {
-            string name = "Choose File";
-            if (!string.IsNullOrEmpty(imageName))
-            {
-                //93b56cb5-1bbc-4211-a640-40135d82e885_dosyaismi.jpg
-                // _'den itibaren uniqueFileName içerisindeki dosya adını ve uzantısını alır.
-                name = imageName.Substring(37);
-            }
-            return name;
-        }
+            var user = _context.Users.FirstOrDefault(x => x.UserName.Equals(username));
 
+            if (user is null)
+                return NotFound();
+
+            List<ArticleListViewModel> articleList = _context.Articles
+            .OrderByDescending(x => x.CreatedTime)
+            .Include(x => x.Author)
+            .Where(x=>x.AuthorId.Equals(user.Id))
+            .AsEnumerable()// DBSet Lokalde değişik bir mimariye sahip olduğundan Çok Satırlı Lambda Kullanımına İzin Vermiyor. Bu Yüzden Yapıyı Enumerable'a çevirmek Gerekiyor.
+            .Select(x =>
+            {
+                return new ArticleListViewModel()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Content = x.Content,
+                    Author = x.Author.FullName,
+                    ArticlePicture = (string.IsNullOrEmpty(x.ArticlePicture) ? "null.png" : x.ArticlePicture),
+                    CreatedTime = x.CreatedTime
+                };
+            })
+            .ToList();
+
+            return View(articleList);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
