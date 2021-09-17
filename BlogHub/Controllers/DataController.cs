@@ -1,12 +1,14 @@
 ﻿using BlogHub.Data;
 using BlogHub.Data.Models;
 using BlogHub.Extensions;
+using BlogHub.Managers;
 using BlogHub.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -19,10 +21,12 @@ namespace BlogHub.Controllers
     {
         readonly DatabaseContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly FileManager _fileManager;
         public DataController(DatabaseContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _fileManager = new FileManager(context, webHostEnvironment);
         }
 
         public IActionResult Index()
@@ -35,7 +39,7 @@ namespace BlogHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = UploadedFile(model.ArticlePicture);
+                string uniqueFileName = _fileManager.UploadedFile(model.ArticlePicture);
 
                 Article article = new Article
                 {
@@ -64,29 +68,12 @@ namespace BlogHub.Controllers
                 article.Content = model.Content;
 
                 if (model.ArticlePicture is not null)
-                    article.ArticlePicture = UploadedFile(model.ArticlePicture);
+                    article.ArticlePicture = _fileManager.UploadedFile(model.ArticlePicture);
                 _context.SaveChanges();
+                _fileManager.RemoveUnneccessaryFiles();
                 return RedirectToAction("Index", "Home");
             }
             return View("~/Views/Home/EditArticle.cshtml", model);
-        }
-
-
-        private string UploadedFile(IFormFile pictureFile)
-        {
-            string uniqueFileName = null;
-
-            if (pictureFile != null)
-            {
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + pictureFile.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    pictureFile.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
         }
     }
 }
