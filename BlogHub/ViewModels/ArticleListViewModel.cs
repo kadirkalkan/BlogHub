@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogHub.ViewModels
 {
-    public class ArticleListViewModel
+    public class ArticleViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

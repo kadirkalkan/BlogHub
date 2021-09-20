@@ -39,14 +39,14 @@ namespace BlogHub.Controllers
 
         public IActionResult Index()
         {
-            List<ArticleListViewModel> articleList = _context.Articles
+            List<ArticleViewModel> articleList = _context.Articles
                 .OrderByDescending(x => x.CreatedTime)
                 .Take(20)
                 .Include(x=> x.Author)
                 .AsEnumerable()// DBSet Lokalde değişik bir mimariye sahip olduğundan Çok Satırlı Lambda Kullanımına İzin Vermiyor. Bu Yüzden Yapıyı Enumerable'a çevirmek Gerekiyor.
                 .Select(x => 
                 {
-                    return new ArticleListViewModel()
+                    return new ArticleViewModel()
                     {
                         Id = x.Id,
                         Title = x.Title,
@@ -100,14 +100,14 @@ namespace BlogHub.Controllers
             if (user is null)
                 return NotFound();
 
-            List<ArticleListViewModel> articleList = _context.Articles
+            List<ArticleViewModel> articleList = _context.Articles
             .OrderByDescending(x => x.CreatedTime)
             .Include(x => x.Author)
             .Where(x=>x.AuthorId.Equals(user.Id))
             .AsEnumerable()// DBSet Lokalde değişik bir mimariye sahip olduğundan Çok Satırlı Lambda Kullanımına İzin Vermiyor. Bu Yüzden Yapıyı Enumerable'a çevirmek Gerekiyor.
             .Select(x =>
             {
-                return new ArticleListViewModel()
+                return new ArticleViewModel()
                 {
                     Id = x.Id,
                     Title = x.Title,
@@ -121,6 +121,29 @@ namespace BlogHub.Controllers
             .ToList();
 
             return View(articleList);
+        }
+
+
+        [HttpGet]
+        public IActionResult Overview(int id)
+        {
+            var article = _context.Articles.Include(x=>x.Author).FirstOrDefault(x => x.Id.Equals(id));
+
+            if (article is null)
+                return NotFound();
+
+            ArticleViewModel model = new ArticleViewModel()
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Content = article.Content,
+                AuthorId = article.AuthorId,
+                Author = article.Author.FullName,
+                ArticlePicture = (string.IsNullOrEmpty(article.ArticlePicture) ? "null.png" : article.ArticlePicture),
+                CreatedTime = article.CreatedTime
+            };
+
+            return View(model);
         }
 
 

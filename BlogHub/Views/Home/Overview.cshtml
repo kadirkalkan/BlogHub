@@ -1,0 +1,20 @@
+﻿@model ArticleViewModel
+@{
+    ViewData["Title"] = "Overview";
+}
+
+<div class="row text-center">
+    <div class="card">
+        <h2>@Model.Title</h2>
+        <h5>@Model.Author, @Model.GetCreatedTime()</h5>
+        <div>
+            <img src="~/images/@Model.ArticlePicture" style="max-height:750px; max-width:750px;" />
+        </div>
+        <br />
+        <div>
+            <p>
+                @Model.Content
+            </p>
+        </div>
+    </div>
+</div>

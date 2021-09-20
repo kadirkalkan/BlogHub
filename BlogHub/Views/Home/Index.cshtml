@@ -1,4 +1,4 @@
-﻿@model List<ArticleListViewModel>
+﻿@model List<ArticleViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col col-8">
-                        <a href="#" class="black action">
+                        <a asp-action="Overview" asp-route-id="@article.Id"  class="black action">
                             <div class="row"><b>Title : </b> &nbsp; @article.Title</div>
                             <div class="row"><b>Content : </b> &nbsp; @article.GetContentSummary()</div>
                         </a>
