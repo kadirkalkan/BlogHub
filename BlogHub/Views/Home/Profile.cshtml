@@ -62,10 +62,13 @@
             <div class="col col-3">
                 <div class="row float-right"><b>Created At : </b> &nbsp; @article.GetCreatedTime() </div>
                 <br />
-                <div class="row float-right">
-                    <a class="btn btn-sm btn-warning" asp-action="EditArticle" asp-route-id="@article.Id"><i class="far fa-edit"></i></a>
-                    <a class="btn btn-sm btn-danger ml-2" asp-controller="Data" asp-action="DeleteArticle" asp-route-id="@article.Id"><i class="fas fa-ban"></i></a>
-                </div>
+                @if (article.AuthorId.Equals(User.GetID())) // Article Sahibi Login Olan Kişimi
+                {
+                    <div class="row float-right">
+                        <a class="btn btn-sm btn-warning" asp-action="EditArticle" asp-route-id="@article.Id"><i class="far fa-edit"></i></a>
+                        <a class="btn btn-sm btn-danger ml-2" asp-controller="Data" asp-action="DeleteArticle" asp-route-id="@article.Id"><i class="fas fa-ban"></i></a>
+                    </div>
+                }
             </div>
         </div>
     }

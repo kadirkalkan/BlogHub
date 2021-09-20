@@ -51,6 +51,7 @@ namespace BlogHub.Controllers
                         Id = x.Id,
                         Title = x.Title,
                         Content = x.Content,
+                        AuthorId = x.AuthorId,
                         Author = x.Author.FullName,
                         ArticlePicture = (string.IsNullOrEmpty(x.ArticlePicture) ? "null.png" : x.ArticlePicture),
                         CreatedTime = x.CreatedTime
@@ -111,6 +112,7 @@ namespace BlogHub.Controllers
                     Id = x.Id,
                     Title = x.Title,
                     Content = x.Content,
+                    AuthorId = x.AuthorId,
                     Author = x.Author.FullName,
                     ArticlePicture = (string.IsNullOrEmpty(x.ArticlePicture) ? "null.png" : x.ArticlePicture),
                     CreatedTime = x.CreatedTime
